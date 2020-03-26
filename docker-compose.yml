@@ -52,3 +52,8 @@ services:
       - /tmp:/tmp
     depends_on:
       - "db"
+
+  ui:
+    image: ui-rignano:prod
+    ports:
+      - 80:80
