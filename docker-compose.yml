@@ -1,0 +1,46 @@
+version: "3.5"
+services:
+  db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: covid19
+      POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer:4.7.6
+    restart: always
+    ports:
+      - 8080:8080
+
+  engine:
+    image: codait/max-object-detector
+    restart: always
+    ports:
+      - 5000:5000
+    volumes:
+      - /tmp:/tmp
+
+  cron:
+    build: ./cron
+    ports:
+      - 5001:5000
+    volumes:
+      - /tmp:/tmp
+      - ./cron:/usr/src/app/
+    depends_on:
+      - db
+
+  api:
+    build: ./api
+    ports:
+      - 5002:5000
+    volumes:
+      - /tmp:/tmp
+      - ./api:/usr/src/app/
+    depends_on:
+      - db
