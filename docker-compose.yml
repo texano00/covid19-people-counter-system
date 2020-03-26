@@ -26,21 +26,24 @@ services:
       - /tmp:/tmp
 
   cron:
-    build: ./cron
+    image: cron:1
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: covid19
+      POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
+      POSTGRES_DB: postgres
     ports:
       - 5001:5000
     volumes:
       - /tmp:/tmp
-      - ./cron:/usr/src/app/
     depends_on:
-      - db
+      - "db"
 
   api:
-    build: ./api
+    image: api:1
     ports:
       - 5002:5000
     volumes:
       - /tmp:/tmp
-      - ./api:/usr/src/app/
     depends_on:
-      - db
+      - "db"

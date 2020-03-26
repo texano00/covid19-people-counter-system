@@ -7,7 +7,7 @@ import random
 import string
 import os
 import json
-from db import connect, insertData
+from db import insertData
 
 cameras = [{
     "url": "https://images2-corrierefiorentino.corriereobjects.it/methode_image/CorriereFiorentino/Video/2020/03/21/Fiorentino/Foto%20-%20Trattate/IMG-1087-kB1B--640x360@CorriereFiorentino-Web-Firenze.JPG",
@@ -22,12 +22,12 @@ def randomString(stringLength=10):
 
 
 def getNewFrame():
-    print("getNewFrame")
+    print("getNewFrame", flush=True)
     for camera in cameras:
         response = requests.get(camera['url'])
         imagePath = "/tmp/"+randomString()+".jpg"
         if response.status_code == 200:
-            print("gotNewFrame")
+            print("gotNewFrame", flush=True)
             with open(imagePath, 'wb') as f:
                 f.write(response.content)
                 count = countPeople(imagePath)
@@ -35,29 +35,29 @@ def getNewFrame():
                     saveToDb(count, camera['code'])
                 os.remove(imagePath)
         else:
-            print("Error retrieving a new frame")
+            print("Error retrieving a new frame", flush=True)
 
 
 def countPeople(imagePath):
-    print("countPeople")
+    print("countPeople", flush=True)
     threshold = 0.3
     url = engineHost + "/model/predict?threshold=0.3"
     files = {'image': open(imagePath,'rb')}
     response = requests.post(url, files=files)
     if response.status_code == 200:
-        print("countedPeople")
+        print("countedPeople", flush=True)
         jsonData = json.loads(response.text)
         jsonData['predictions'] = list(filter(lambda item: (item['label'] == 'person'), jsonData['predictions']))        
         # print(jsonData['predictions'])
         people = len(jsonData['predictions'])
-        print(people)
+        print(people, flush=True)
         return people
     else:
         print("Error calling engine")
         return -1
 
 def saveToDb(count, code):
-    # TODO: save to postgres
+    print("saveToDb", flush=True)
     insertData(count, code)
 
 scheduler = BackgroundScheduler()
@@ -67,7 +67,6 @@ scheduler.start()
 # Shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
 app = Flask(__name__)
-connect()
 
 @app.route('/ping')
 def hello_world():

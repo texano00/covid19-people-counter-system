@@ -5,9 +5,7 @@ RUN apt-get install -y postgresql libpq-dev postgresql-client postgresql-client-
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
+RUN pip install -r requirements.txt
 
-CMD [ "flask", "run" ]
+CMD ["./wait-for-postgres.sh", "db", "flask", "run"]
