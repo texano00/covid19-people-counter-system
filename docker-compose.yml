@@ -41,6 +41,11 @@ services:
 
   api:
     image: api:1
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: covid19
+      POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
+      POSTGRES_DB: postgres
     ports:
       - 5002:5000
     volumes:
