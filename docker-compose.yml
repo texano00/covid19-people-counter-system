@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+      - ./db/ddl.sh:/docker-entrypoint-initdb.d/init-db.sh
     ports:
       - 5432:5432
 
@@ -27,20 +28,26 @@ services:
 
   cron:
     image: cron:1
+    restart: always
     environment:
       POSTGRES_HOST: db
       POSTGRES_USER: covid19
       POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
       POSTGRES_DB: postgres
+      ENGINE_HOST: http://engine:5000
+      TZ: Europe/Rome
+      FREQUENCE_MINUTES: 1
     ports:
       - 5001:5000
     volumes:
       - /tmp:/tmp
+      - ./config.json:/usr/src/app/config.json
     depends_on:
       - "db"
 
   api:
     image: api:1
+    restart: always
     environment:
       POSTGRES_HOST: db
       POSTGRES_USER: covid19
@@ -54,6 +61,7 @@ services:
       - "db"
 
   ui:
-    image: ui-rignano:prod
+    image: ui-default:1
+    restart: always
     ports:
       - 80:80
