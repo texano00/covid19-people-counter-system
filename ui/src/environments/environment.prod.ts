@@ -5,5 +5,5 @@ export const environment = {
   locale: "it-CH",
   dateFormat: 'dd/MM/yyyy HH:mm',
   timezone: '+01',
-  frequency: 5000,
+  frequency: 20000,
 };

@@ -94,6 +94,15 @@ You need con set only:
 set up your A Record to point to your server IP
 
 5. run it!\
+
+`cd api && docker build . -t api:1 && cd ..`
+
+`cd cron && docker build . -t cron:1 && cd ..`
+
+`cd ui && docker build -t ui-default:1 . && cd ..`
+
+`cd ingress && docker build . -t ingress:1 && cd ..`
+
 `docker-compose up -d`
 
 # Todo

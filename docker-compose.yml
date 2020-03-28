@@ -71,7 +71,7 @@ services:
     restart: always
     # USE ONLY FOR DEBUG
     # ports:
-    #  - 5003:80
+    #   - 5003:80
 
   ingress:
     image: ingress:1
