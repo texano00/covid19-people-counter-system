@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  codes: ["coop","cadorna"],
+  apiHost: "http://localhost",
+  locale: "it-CH",
+  dateFormat: 'dd/MM/yyyy HH:mm',
+  timezone: '+01',
+  frequency: 5000,
 };
 
 /*

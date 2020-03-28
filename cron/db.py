@@ -4,7 +4,7 @@ from configparser import ConfigParser
 from datetime import datetime
 import os
 
-def insertData(count, code):
+def insertData(count, code, description):
     """ insert a new data """
     conn = None
     try:
@@ -17,14 +17,14 @@ def insertData(count, code):
         print(error, flush=True)
     finally:
         if conn is not None:
-            sql = """INSERT INTO data.people(count, code, date)
-                    VALUES(%s,%s,%s);"""
+            sql = """INSERT INTO data.people(count, code, date, description)
+                    VALUES(%s,%s,%s,%s);"""
             timestamp = datetime.now()
             try:
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, (count,code,timestamp,))
+                cur.execute(sql, (count,code,timestamp,description,))
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database

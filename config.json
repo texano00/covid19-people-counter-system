@@ -1,18 +1,22 @@
 [
     {
         "url": "https://images2-corrierefiorentino.corriereobjects.it/methode_image/CorriereFiorentino/Video/2020/03/21/Fiorentino/Foto%20-%20Trattate/IMG-1087-kB1B--640x360@CorriereFiorentino-Web-Firenze.JPG",
-        "code": "coop"
+        "code": "coop",
+        "description": "Coop"
     },
     {
         "url": "https://www.milanocam.it/Cadorna/images_archive/[YYYY][MM][DD]/[YYYY][MM][DD]_[HH]0000_Cadorna_1920x1080.jpg",
-        "code": "cadorna"
+        "code": "cadorna",
+        "description":"Cadorna Milano"
     },
     {
         "url": "https://www.milanocam.it/Castello_1/images_archive/[YYYY][MM][DD]/[YYYY][MM][DD]_[HH]0000_Castello_1_1920x1080.jpg",
-        "code": "castello_1"
+        "code": "castello_1",
+        "description":"Castello Milano 1"
     },
     {
         "url": "https://www.milanocam.it/BuenosAires_1/images_archive/[YYYY][MM][DD]/[YYYY][MM][DD]_[HH]0000_BuenosAires_1_1920x1080.jpg",
-        "code": "buenosaires_1"
+        "code": "buenosaires_1",
+        "description":"Corso Buenos Aires 1"
     }
 ]

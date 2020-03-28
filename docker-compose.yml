@@ -8,21 +8,25 @@ services:
       POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      - ./db/ddl.sh:/docker-entrypoint-initdb.d/init-db.sh
-    ports:
-      - 5432:5432
+      - ./db/schema.sh:/docker-entrypoint-initdb.d/schema.sh
+      - ./db/table.sh:/docker-entrypoint-initdb.d/table.sh
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 5432:5432
 
   adminer:
     image: adminer:4.7.6
     restart: always
-    ports:
-      - 8080:8080
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 8080:8080
 
   engine:
     image: codait/max-object-detector
     restart: always
-    ports:
-      - 5000:5000
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 5000:5000
     volumes:
       - /tmp:/tmp
 
@@ -37,8 +41,9 @@ services:
       ENGINE_HOST: http://engine:5000
       TZ: Europe/Rome
       FREQUENCE_MINUTES: 1
-    ports:
-      - 5001:5000
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 5001:5000
     volumes:
       - /tmp:/tmp
       - ./config.json:/usr/src/app/config.json
@@ -53,8 +58,9 @@ services:
       POSTGRES_USER: covid19
       POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
       POSTGRES_DB: postgres
-    ports:
-      - 5002:5000
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 5002:5000
     volumes:
       - /tmp:/tmp
     depends_on:
@@ -63,5 +69,15 @@ services:
   ui:
     image: ui-default:1
     restart: always
+    # USE ONLY FOR DEBUG
+    # ports:
+    #  - 5003:80
+
+  ingress:
+    image: ingress:1
+    restart: always
+    environment:
+      DOMAIN: test.yuribacciarini.com
     ports:
       - 80:80
+      # - 443:443

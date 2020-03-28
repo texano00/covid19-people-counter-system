@@ -49,7 +49,7 @@ def getNewFrame():
                 f.write(response.content)
                 count = countPeople(imagePath)
                 if(count!=-1):
-                    saveToDb(count, camera['code'])
+                    saveToDb(count, camera['code'], camera['description'])
                 os.remove(imagePath)
         else:
             print("Error retrieving a new frame", flush=True)
@@ -73,9 +73,9 @@ def countPeople(imagePath):
         print("Error calling engine")
         return -1
 
-def saveToDb(count, code):
+def saveToDb(count, code, description):
     print("saveToDb", flush=True)
-    insertData(count, code)
+    insertData(count, code, description)
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=getNewFrame, trigger="interval", minutes=int(os.getenv('FREQUENCE_MINUTES')))

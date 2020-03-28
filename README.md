@@ -1,16 +1,12 @@
-# TODO
-* check init db that doesn't work
-* develop default UI
-
 # covid19-people-counter-system
-covid19-people-counter-system comes to share queue length or simply count people outside markets/shop to citizens.
+covid19-people-counter-system comes to share queue length to citizens or simply count people outside markets/shop.
 
-This system analize images from city cameras, count people inside them, and show a real-time user interface.
-
+This system analize images from city cameras, count people inside them, and show a real-time user interface.\
+The software is entirely on-premise so it doesn't need internet access. This is the best way to **guarantee people privacy.**\
 City cameras generally already exists or come from new installations by covid emergency.
 
-GIF Example\
-TODO
+# Demo UI
+<img src="demo.gif"/>
 
 # Requirements
 Hardware
@@ -22,9 +18,10 @@ Software
 
 # Configs steps
 * 1. set up cameras urls/ips
-* 2. set up frequence
-* 3. set up custom UI (optional)
-
+* 2. set up environment in docker-compose
+* 3. set up environment in Angular UI
+* 4. set up DNS
+* 5. run it!
 
 # 1. set up cameras urls/ips
 `config.json` contains all cameras that covid19-people-counter-system has to contact to get fresh frames.\
@@ -55,11 +52,49 @@ So an url like:
 at runtime will be `https://someserver.com/2020/03/27/09/10`.\
 The timezone is set by TZ env variable of "cron" in docker-compose.
 
-# 2. set up frequence
+# 2. set up environment in docker-compose
+
+The only variables you need to change are:
+
+* POSTGRES_USER (set a DB username)
+* POSTGRES_PASSWORD (set a DB psw)
+* TZ: Europe/Rome (set your timezone)
+* FREQUENCE_MINUTES [1]
+* DOMAIN: test.yuribacciarini.com (your public domain)
+
+[1]
 How much you want the data to be fresh?\
 FREQUENCE_MINUTES env variable set it.\
 For example FREQUENCE_MINUTES=5 says to covid19-people-counter-system to get fresh images every 5 minutes from every images configured in config.json.
 
-# 3. set up custom UI
-TODO
 
+3. set up environment in Angular UI
+
+Edit `ui/src/environments/environment.prod.ts`
+
+```
+export const environment = {
+  production: true,
+  codes: ["coop","cadorna"],
+  apiHost: "http://localhost",
+  locale: "it-CH",
+  dateFormat: 'dd/MM/yyyy HH:mm',
+  timezone: '+01',
+  frequency: 5000
+};
+```
+
+You need con set only:
+* codes: the list of your codes cameras defined in config.json (1. set up cameras urls/ips)
+* dateFormat: date format for the charts
+* timezone: your timezone
+* frequency: refresh frequence
+
+4. set up your DNS\
+set up your A Record to point to your server IP
+
+5. run it!\
+`docker-compose up -d`
+
+# Todo
+* HTTPs support
