@@ -1,9 +1,21 @@
 # covid19-people-counter-system
 covid19-people-counter-system comes to share queue length to citizens or simply count people outside markets/shop.
 
-This system analize images from city cameras, count people inside them, and show a real-time user interface.\
-The software is entirely on-premise so it doesn't need internet access. This is the best way to **guarantee people privacy.**\
+This system analizes images from city cameras, count people inside them, and show a real-time user interface wich can be included in an app or website through an `<iframe>`.\
+
+The software is entirely on-premise so it doesn't need internet access. So sensitive data from original frame stay only inside the used server.\
+This is the best way to **guarantee people privacy**.\
 City cameras generally already exists or come from new installations by covid emergency.
+
+# Who it is for
+* cities
+* public organizations
+* universities
+
+Or simply who owns cameras and wants to count people real-time.
+
+# How it works
+<img src="how.png"/>
 
 # Demo UI
 <img src="demo.gif"/>
@@ -68,7 +80,7 @@ FREQUENCE_MINUTES env variable set it.\
 For example FREQUENCE_MINUTES=5 says to covid19-people-counter-system to get fresh images every 5 minutes from every images configured in config.json.
 
 
-3. set up environment in Angular UI
+# 3. set up environment in Angular UI
 
 Edit `ui/src/environments/environment.prod.ts`
 
@@ -90,20 +102,28 @@ You need con set only:
 * timezone: your timezone
 * frequency: refresh frequence
 
-4. set up your DNS\
+# 4. set up your DNS
 set up your A Record to point to your server IP
 
-5. run it!\
+# 5. run it!
 
-`cd api && docker build . -t api:1 && cd ..`
 
-`cd cron && docker build . -t cron:1 && cd ..`
+```
+# build api
+cd api && docker build . -t api:1 && cd ..
 
-`cd ui && docker build -t ui-default:1 . && cd ..`
+# build cron
+cd cron && docker build . -t cron:1 && cd ..
 
-`cd ingress && docker build . -t ingress:1 && cd ..`
+# build ui
+cd ui && docker build -t ui-default:1 . && cd ..
 
-`docker-compose up -d`
+# build ingress
+cd ingress && docker build . -t ingress:1 && cd ..
+
+# run
+docker-compose up -d
+```
 
 # Todo
 * HTTPs support
