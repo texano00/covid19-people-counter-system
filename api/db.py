@@ -18,7 +18,7 @@ def getCountByCode(code):
         print(error, flush=True)
     finally:
         if conn is not None:
-            sql = "SELECT * FROM data.people P WHERE P.code='"+code+"' ORDER BY date desc LIMIT 20"
+            sql = "SELECT * FROM public.people P WHERE P.code='"+code+"' ORDER BY date desc LIMIT 20"
             try:
                 # create a new cursor
                 cur = conn.cursor()

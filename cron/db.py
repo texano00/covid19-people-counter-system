@@ -17,7 +17,7 @@ def insertData(count, code, description):
         print(error, flush=True)
     finally:
         if conn is not None:
-            sql = """INSERT INTO data.people(count, code, date, description)
+            sql = """INSERT INTO public.people(count, code, date, description)
                     VALUES(%s,%s,%s,%s);"""
             timestamp = datetime.now()
             try:

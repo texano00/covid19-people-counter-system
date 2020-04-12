@@ -1,18 +1,19 @@
 version: "3.5"
 services:
   db:
-    image: postgres:12
+    image: postgres:9.4
     restart: always
     environment:
       POSTGRES_USER: covid19
       POSTGRES_PASSWORD: dsXdsadYsafdDssSpLX
+      POSTGRES_DB: postgres
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      - ./db/schema.sh:/docker-entrypoint-initdb.d/schema.sh
-      - ./db/table.sh:/docker-entrypoint-initdb.d/table.sh
-    # USE ONLY FOR DEBUG
-    # ports:
-    #  - 5432:5432
+      #-./db/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./db/01-init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      # USE ONLY FOR DEBUG
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer:4.7.6
@@ -40,7 +41,7 @@ services:
       POSTGRES_DB: postgres
       ENGINE_HOST: http://engine:5000
       TZ: Europe/Rome
-      FREQUENCE_MINUTES: 1
+      FREQUENCE_MINUTES: 2
     # USE ONLY FOR DEBUG
     # ports:
     #  - 5001:5000
