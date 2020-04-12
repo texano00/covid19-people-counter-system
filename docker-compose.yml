@@ -9,11 +9,10 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      #-./db/init.sh:/docker-entrypoint-initdb.d/init.sh
       - ./db/01-init.sql:/docker-entrypoint-initdb.d/01-init.sql
-      # USE ONLY FOR DEBUG
-    ports:
-      - 5432:5432
+    # USE ONLY FOR DEBUG
+    #ports:
+    # - 5432:5432
 
   adminer:
     image: adminer:4.7.6
