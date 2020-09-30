@@ -1,11 +1,11 @@
-# covid19-people-counter-system
-covid19-people-counter-system comes to share queue length to citizens or simply count people outside markets/shop.
+# Covid19-people-counter-system
+Covid19-people-counter-system comes to share queue length to citizens or simply count people outside markets/shop.
 
-This system analizes images from city cameras, count people inside them, and show a real-time user interface wich can be included in an app or website through an `<iframe>`.\
+This system analizes images from city cameras, count people inside them, and show a real-time user interface which can be included in an app or website through an `<iframe>`.\
 
 The software is entirely on-premise so it doesn't need internet access. So sensitive data from original frame stay only inside the used server.\
 This is the best way to **guarantee people privacy**.\
-City cameras generally already exists or come from new installations by covid emergency.
+City cameras generally already exists or come from new installations due to covid emergency.
 
 # Who it is for
 * cities
